@@ -82,7 +82,7 @@ for (j in 1:length(sound)){
 }
 
 
-####start type 求间隔的平均，间隔的方差，间隔的max min
+####start type
 ####8 9 11 13
 ###8 loudness max
 features8=matrix(nrow=2350,ncol=90)
@@ -194,20 +194,35 @@ for (m in 1:length(sound)){
 features_num<-cbind(features8,features9,features11,features13)
 
 
-###model fitting using XGBoost
+###model fitting using Random Forest
+#####random forest
 features= as.data.frame(features_num)
 features[is.na(features)]=0
 features_train= features[index,]
 features_test= features[-index,]
-param <- list(objective = "binary:logistic", max_depth = 7,eta = 0.13, gamma = 0.1)
 y_pre= vector()
-for(i in 1:20){
-  dtrain <- xgb.DMatrix(as.matrix(features_train),label = y_train[,i])
-  xg.fit <- xgboost(data=dtrain, params=param, nrounds=20, nthread=6)
-  pre= predict(xg.fit, as.matrix(features_test))
+######Tune parameters
+fgl.res <- tuneRF(as.matrix(features_train), y_train[,i], stepFactor=1.5)
+######results
+#mtry = 780  OOB error = 0.09373164 
+#Searching left ...
+#mtry = 520 	OOB error = 0.09388433 
+#-0.001628979 0.05 
+#Searching right ...
+#mtry = 1170 	OOB error = 0.09382326 
+#-0.0009773781 0.05 
+########
+
+
+
+i=1
+for (i in 1:20){
+  
+  rf.fit <- randomForest(as.matrix(features_train), y_train[,i], 
+                         ntree=520)
+  pre= predict(rf.fit, newdata=as.matrix(features_test))
   y_pre= cbind(y_pre, pre)
 }
-
 # Fit predict probability of 5000 word in the test songs
 rank.words_test= matrix(0, ncol=5000)
 for(i in 1:(2350-length(index))){
