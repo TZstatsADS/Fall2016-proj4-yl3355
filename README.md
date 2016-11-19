@@ -8,9 +8,9 @@ Term: Fall 2016
 
 + [Data link](https://courseworks2.columbia.edu/courses/11849/files/folder/Project_Files?preview=763391)-(**courseworks login required**)
 + [Data description](doc/readme.html)
-+ Contributor's name:
-+ Projec title: Lorem ipsum dolor sit amet
-+ Project summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
++ Contributor's name:Youzhu Liu
++ Projec title: Words for Music
++ Project summary: In this project, I use different methods to find a way predicting lyrics rank based on music features. I perform topic modeling on lyrics dataset of 2350 songs and 5000 words and cluster them into 20 topics. Then I extract music features of those songs and try to build bridges between lyrics and musics. Methods using are tuned XGBoost and Random Forest, and after comparing efficiency and accruacy rate, XGBoost became my final choice. 
 	
 Following [suggestions](http://nicercode.github.io/blog/2013-04-05-projects/) by [RICH FITZJOHN](http://nicercode.github.io/about/#Team) (@richfitz). This folder is orgarnized as follows.
 
